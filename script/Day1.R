@@ -8,13 +8,7 @@ day1_data <- readr::read_delim(file = here::here("data/Day1.txt"), delim = "/t",
 ## PUZZLE 1
 
 #tidyverse way
-day1_data %>%
-  dplyr::mutate(deeper = depth < dplyr::lead(depth)) %>%
-  dplyr::pull(deeper) %>%
-  sum(na.rm = TRUE)
-
-#base R way
-sum(day1_data$depth[1:nrow(day1_data) - 1] < day1_data$depth[2:nrow(day1_data)])
+sum(day1_data$depth < dplyr::lead(day1_data$depth), na.rm = TRUE)
 
 ## PUZZLE 2
 
