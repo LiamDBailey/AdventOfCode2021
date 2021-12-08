@@ -4,7 +4,7 @@ library(dplyr)
 
 #Load data. We now have our x and y coordinates as separate comma separated character strings
 #Use readr to start because it allows for separator that is not 1 bit (unlike e.g. scan)
-raw_data <- readr::read_delim(here::here("./data/Day5.txt"),
+raw_data <- readr::read_delim(here::here("./data/Day5_test.txt"),
                               delim = " -> ", col_names = c("start", "end"),
                               show_col_types = FALSE,
                               col_types = list(start = readr::col_character(),
@@ -69,10 +69,6 @@ for (i in 1:nrow(diag)) {
                                !down & !right ~ c(`-`, `+`))
 
   zero_mat[direction_funcs[[1]](start_value, 0L:((diff_y) - 1L) * (direction_funcs[[2]](dim(zero_mat)[1L], 1)))] <- zero_mat[direction_funcs[[1]](start_value, 0L:((diff_y) - 1L) * (direction_funcs[[2]](dim(zero_mat)[1L], 1)))] + 1
-
-  #1 + dim(zero_mat[1L]*start_y) will start the diagonal in the correct column
-  #0L:((end_y + 1) - 1L) counts how many rows it should move along the diagonal (equal to the distance in y)
-  #* (dim(zero_mat)[1L] + 1) ensures that every step moves 1 more than the number of cols (i.e. moves on the diagonal)
 
 }
 
